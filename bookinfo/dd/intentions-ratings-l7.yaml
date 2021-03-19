@@ -1,0 +1,19 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceIntentions
+metadata:
+  name: reviews
+spec:
+  destination:
+    name: reviews
+  sources:
+    - name: productpage
+      action: ''
+      permissions:
+       - action: allow
+         http:
+           header:
+            - name: end-user
+              present: true
+       - action: deny
+         http:
+           pathPrefix: /
